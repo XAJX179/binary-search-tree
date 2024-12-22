@@ -1,4 +1,3 @@
 # frozen_string_literal: true
 
-require_relative 'lib/node'
-require_relative 'lib/tree'
+require_relative 'lib/binary_search_tree'

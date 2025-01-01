@@ -4,7 +4,7 @@
 module BinarySearchTree
   # Node class for creating nodes for the Tree
   class Node
-    attr_accessor :data
+    attr_accessor :data, :left, :right
 
     def initialize(data)
       # stores value of the node

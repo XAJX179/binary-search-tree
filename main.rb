@@ -2,8 +2,8 @@
 
 require_relative 'lib/binary_search_tree'
 
-arr = [213, 321, 42]
+arr = [7, 7, 6, 5, 4, 3, 2, 1, 1]
 
 bst = BinarySearchTree.new(arr)
 
-pp bst
+bst.to_s

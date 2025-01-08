@@ -4,6 +4,8 @@
 module BinarySearchTree
   # Tree Class for creating binary search trees
   class Tree
+    attr_reader :root
+
     def initialize(arr)
       @root = build_tree(arr)
     end
@@ -31,6 +33,20 @@ module BinarySearchTree
       to_s(node.right, "#{prefix}#{is_left ? '│   ' : '    '}", false) if node.right
       puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.data}"
       to_s(node.left, "#{prefix}#{is_left ? '    ' : '│   '}", true) if node.left
+    end
+
+    # inserts a leaf (unbalances the tree)
+    def insert(val, curr_node = @root)
+      return Node.new(val) if curr_node.nil?
+      return curr_node if curr_node.data == val # no duplicates
+
+      if val < curr_node.data # if val is smaller go left
+        curr_node.left = insert(val, curr_node.left)
+      elsif val > curr_node.data # if val is bigger go right
+        curr_node.right = insert(val, curr_node.right)
+      end
+
+      curr_node
     end
   end
 end

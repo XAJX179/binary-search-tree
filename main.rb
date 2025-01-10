@@ -16,24 +16,7 @@ bst.insert(8)
 bst.insert(9)
 bst.insert(10)
 
-bst.to_s
-
-bst.delete(4)
-
-bst.to_s
-
-bst.delete(7)
-
-bst.to_s
-
-bst.delete(7)
-
-bst.to_s
-
-bst.delete(7)
-
-bst.to_s
-
-bst.delete(10)
+puts bst.find(9)
+puts bst.root.right.right.right.right
 
 bst.to_s

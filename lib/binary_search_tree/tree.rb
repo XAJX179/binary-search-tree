@@ -48,5 +48,37 @@ module BinarySearchTree
 
       curr_node
     end
+
+    # delete node of tree matching the given value
+    def delete(val, curr_node = @root)
+      return nil if curr_node.nil?
+
+      if val < curr_node.data
+        curr_node.left = delete(val, curr_node.left)
+      elsif val > curr_node.data
+        curr_node.right = delete(val, curr_node.right)
+      else
+        return handle_child(curr_node)
+      end
+      curr_node
+    end
+
+    def find_successor(node)
+      return nil if node.nil?
+
+      node = node.right
+      node = node.left until node.left.nil?
+      node
+    end
+
+    def handle_child(curr_node)
+      return curr_node.right if curr_node.left.nil?
+      return curr_node.left if curr_node.right.nil?
+
+      successor = find_successor(curr_node)
+      curr_node.data = successor.data
+      curr_node.right = delete(successor.data, curr_node.right)
+      curr_node
+    end
   end
 end

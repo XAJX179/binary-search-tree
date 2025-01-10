@@ -80,5 +80,17 @@ module BinarySearchTree
       curr_node.right = delete(successor.data, curr_node.right)
       curr_node
     end
+
+    def find(val, curr_node = @root)
+      return nil if curr_node.nil?
+
+      if val < curr_node.data
+        find(val, curr_node.left)
+      elsif val > curr_node.data
+        find(val, curr_node.right)
+      else
+        curr_node
+      end
+    end
   end
 end

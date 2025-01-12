@@ -92,5 +92,20 @@ module BinarySearchTree
         curr_node
       end
     end
+
+    def level_order
+      return nil if @root.nil?
+
+      queue = [@root]
+      result = []
+
+      until queue.empty?
+        result << current = queue.shift
+        yield(current) if block_given?
+        queue << current.left unless current.left.nil?
+        queue << current.right unless current.right.nil?
+      end
+      result unless block_given?
+    end
   end
 end

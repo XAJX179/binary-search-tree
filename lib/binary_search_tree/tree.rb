@@ -161,5 +161,15 @@ module BinarySearchTree
 
       result unless block_given?
     end
+
+    def height(node = @root, val = -1)
+      return val if node.nil?
+
+      val += 1
+      left_val = height(node.left, val)
+      right_val = height(node.right, val)
+
+      [left_val, right_val].max
+    end
   end
 end

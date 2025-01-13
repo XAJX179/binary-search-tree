@@ -102,27 +102,28 @@ module BinarySearchTree
       until queue.empty?
         result << current = queue.shift
         yield(current) if block_given?
-        queue << current.left unless current.left.nil?
-        queue << current.right unless current.right.nil?
+        append_child_to_queue(queue, current)
       end
       result unless block_given?
     end
 
     def level_order_recur(queue = [@root], result = [], &block)
-      return nil if @root.nil?
-
-      return result if queue.empty? && !block_given?
-
-      return if queue.empty?
+      return nil if @root.nil? || queue.empty?
 
       result << current = queue.shift
 
       yield(current) if block_given?
 
-      queue << current.left unless current.left.nil?
-      queue << current.right unless current.right.nil?
+      append_child_to_queue(queue, current)
 
       level_order_recur(queue, result, &block)
+
+      result if queue.empty? && !block_given?
+    end
+
+    def append_child_to_queue(queue, current)
+      queue << current.left unless current.left.nil?
+      queue << current.right unless current.right.nil?
     end
   end
 end

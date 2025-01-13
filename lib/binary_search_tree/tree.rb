@@ -107,5 +107,22 @@ module BinarySearchTree
       end
       result unless block_given?
     end
+
+    def level_order_recur(queue = [@root], result = [], &block)
+      return nil if @root.nil?
+
+      return result if queue.empty? && !block_given?
+
+      return if queue.empty?
+
+      result << current = queue.shift
+
+      yield(current) if block_given?
+
+      queue << current.left unless current.left.nil?
+      queue << current.right unless current.right.nil?
+
+      level_order_recur(queue, result, &block)
+    end
   end
 end

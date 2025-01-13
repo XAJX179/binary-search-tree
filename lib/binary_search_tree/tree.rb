@@ -125,5 +125,41 @@ module BinarySearchTree
       queue << current.left unless current.left.nil?
       queue << current.right unless current.right.nil?
     end
+
+    def preorder(node = @root, result = [], &block)
+      return nil if node.nil?
+
+      result << node
+
+      yield(node) if block_given?
+      preorder(node.left, result, &block)
+      preorder(node.right, result, &block)
+
+      result unless block_given?
+    end
+
+    def inorder(node = @root, result = [], &block)
+      return nil if node.nil?
+
+      result << node
+
+      inorder(node.left, result, &block)
+      yield(node) if block_given?
+      inorder(node.right, result, &block)
+
+      result unless block_given?
+    end
+
+    def postorder(node = @root, result = [], &block)
+      return nil if node.nil?
+
+      result << node
+
+      postorder(node.left, result, &block)
+      postorder(node.right, result, &block)
+      yield(node) if block_given?
+
+      result unless block_given?
+    end
   end
 end

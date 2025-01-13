@@ -58,3 +58,15 @@ pp x
 y = bst.postorder
 
 pp y
+
+bst.to_s
+
+pp bst.height
+
+bst.delete(8)
+
+bst.delete(7)
+
+bst.to_s
+
+pp bst.height

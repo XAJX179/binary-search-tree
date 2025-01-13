@@ -28,3 +28,33 @@ pp x
 y = bst.level_order_recur
 
 pp y
+
+bst.to_s
+
+x = bst.preorder { |node| p node.data * 10 }
+
+pp x
+
+y = bst.preorder
+
+pp y
+
+bst.to_s
+
+x = bst.inorder { |node| p node.data * 10 }
+
+pp x
+
+y = bst.inorder
+
+pp y
+
+bst.to_s
+
+x = bst.postorder { |node| p node.data * 10 }
+
+pp x
+
+y = bst.postorder
+
+pp y

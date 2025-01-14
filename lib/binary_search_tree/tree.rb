@@ -171,5 +171,18 @@ module BinarySearchTree
 
       [left_val, right_val].max
     end
+
+    def depth(target_node, val=0, current_node = @root)
+      return val if target_node == current_node
+      return 0 if current_node.nil?
+
+      val += 1
+
+      left = depth(target_node, val, current_node.left)
+
+      return left if left.positive?
+
+      depth(target_node, val, current_node.right)
+    end
   end
 end

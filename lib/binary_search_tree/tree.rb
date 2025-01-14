@@ -25,7 +25,7 @@ module BinarySearchTree
 
       if val < curr_node.data # if val is smaller go left
         curr_node.left = insert(val, curr_node.left)
-      elsif val > curr_node.data # if val is bigger go right
+      else # if val is bigger go right
         curr_node.right = insert(val, curr_node.right)
       end
 

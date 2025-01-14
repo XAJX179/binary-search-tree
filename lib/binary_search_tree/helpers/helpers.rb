@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Balanced Binary Search Tree
 module BinarySearchTree
   # Helps tree methods
   module Helpers

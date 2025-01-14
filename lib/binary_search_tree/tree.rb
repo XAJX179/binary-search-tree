@@ -1,38 +1,21 @@
 # frozen_string_literal: true
 
+require_relative 'helpers/helpers'
+
 # Balanced Binary Search Tree
 module BinarySearchTree
   # Tree Class for creating binary search trees
   class Tree
-    attr_reader :root
-
     def initialize(arr)
       @root = build_tree(arr)
     end
+
+    include Helpers
 
     # builds a balanced binary tree
     def build_tree(arr)
       new_arr = arr.sort.uniq
       build_tree_recur(new_arr, 0, new_arr.length - 1)
-    end
-
-    # takes array and start and ending of arr range and builds bst recursively
-    def build_tree_recur(new_arr, start, ending)
-      return nil if start > ending
-
-      mid = (start + ending) / 2
-      root = Node.new new_arr[mid]
-
-      root.left = build_tree_recur(new_arr, start, mid - 1)
-      root.right = build_tree_recur(new_arr, mid + 1, ending)
-      root
-    end
-
-    # pretty print
-    def to_s(node = @root, prefix = '', is_left = true)
-      to_s(node.right, "#{prefix}#{is_left ? '│   ' : '    '}", false) if node.right
-      puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.data}"
-      to_s(node.left, "#{prefix}#{is_left ? '    ' : '│   '}", true) if node.left
     end
 
     # inserts a leaf (unbalances the tree)
@@ -63,24 +46,7 @@ module BinarySearchTree
       curr_node
     end
 
-    def find_successor(node)
-      return nil if node.nil?
-
-      node = node.right
-      node = node.left until node.left.nil?
-      node
-    end
-
-    def handle_child(curr_node)
-      return curr_node.right if curr_node.left.nil?
-      return curr_node.left if curr_node.right.nil?
-
-      successor = find_successor(curr_node)
-      curr_node.data = successor.data
-      curr_node.right = delete(successor.data, curr_node.right)
-      curr_node
-    end
-
+    # find node with given value
     def find(val, curr_node = @root)
       return nil if curr_node.nil?
 
@@ -93,6 +59,7 @@ module BinarySearchTree
       end
     end
 
+    # level_order traversal (BFS)
     def level_order
       return nil if @root.nil?
 
@@ -107,24 +74,7 @@ module BinarySearchTree
       result unless block_given?
     end
 
-    def level_order_recur(queue = [@root], result = [], &block)
-      return nil if @root.nil? || queue.empty?
-
-      result << current = queue.shift
-
-      yield(current) if block_given?
-
-      append_child_to_queue(queue, current)
-
-      level_order_recur(queue, result, &block)
-
-      result if queue.empty? && !block_given?
-    end
-
-    def append_child_to_queue(queue, current)
-      queue << current.left unless current.left.nil?
-      queue << current.right unless current.right.nil?
-    end
+    # DFS methods - DLR,LDR,LRD
 
     def preorder(node = @root, result = [], &block)
       return nil if node.nil?
@@ -162,6 +112,7 @@ module BinarySearchTree
       result unless block_given?
     end
 
+    # find height of given node (node to tail longest distance)
     def height(node = @root, val = -1)
       return val if node.nil?
 
@@ -172,6 +123,7 @@ module BinarySearchTree
       [left_val, right_val].max
     end
 
+    # find depth of node (distance from root to node)
     def depth(target_node, val = 0, current_node = @root)
       return val if target_node == current_node
       return 0 if current_node.nil?
@@ -185,6 +137,7 @@ module BinarySearchTree
       depth(target_node, val, current_node.right)
     end
 
+    # returns true if left and right subtree height doesn't differ > 1 else false
     def balanced?
       left = height(@root.left)
       right = height(@root.right)
@@ -193,6 +146,7 @@ module BinarySearchTree
       diff <= 1
     end
 
+    # rebalances the tree
     def rebalance
       result = inorder(@root).map(&:data)
       @root = build_tree(result)

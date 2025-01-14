@@ -184,5 +184,13 @@ module BinarySearchTree
 
       depth(target_node, val, current_node.right)
     end
+
+    def balanced?
+      left = height(@root.left)
+      right = height(@root.right)
+
+      diff = (left - right).abs
+      diff <= 1
+    end
   end
 end

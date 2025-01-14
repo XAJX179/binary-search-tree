@@ -70,3 +70,21 @@ bst.delete(7)
 bst.to_s
 
 pp bst.height
+
+bst.to_s
+
+bst.insert(11)
+
+bst.to_s
+
+pp bst.depth(bst.find(9))
+
+pp bst.balanced?
+
+bst.delete(11)
+
+
+bst.to_s
+
+pp bst.balanced?
+pp 'end'

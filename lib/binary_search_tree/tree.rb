@@ -172,7 +172,7 @@ module BinarySearchTree
       [left_val, right_val].max
     end
 
-    def depth(target_node, val=0, current_node = @root)
+    def depth(target_node, val = 0, current_node = @root)
       return val if target_node == current_node
       return 0 if current_node.nil?
 
@@ -194,7 +194,7 @@ module BinarySearchTree
     end
 
     def rebalance
-      result = inorder(@root)
+      result = inorder(@root).map(&:data)
       @root = build_tree(result)
     end
   end

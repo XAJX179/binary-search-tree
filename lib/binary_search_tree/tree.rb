@@ -192,5 +192,10 @@ module BinarySearchTree
       diff = (left - right).abs
       diff <= 1
     end
+
+    def rebalance
+      result = inorder(@root)
+      @root = build_tree(result)
+    end
   end
 end

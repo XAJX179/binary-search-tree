@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'debug'
+# require 'debug'
 require_relative 'lib/binary_search_tree'
 # binding.break
 

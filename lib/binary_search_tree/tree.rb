@@ -5,7 +5,7 @@ require_relative 'helpers/helpers'
 # Balanced Binary Search Tree
 module BinarySearchTree
   # Tree Class for creating binary search trees
-  class Tree
+  class Tree # rubocop:disable Metrics/ClassLength
     def initialize(arr)
       @root = build_tree(arr)
     end
@@ -16,6 +16,18 @@ module BinarySearchTree
     def build_tree(arr)
       new_arr = arr.sort.uniq
       build_tree_recur(new_arr, 0, new_arr.length - 1)
+    end
+
+    # takes array and start and ending of arr range and builds bst recursively
+    def build_tree_recur(new_arr, start, ending)
+      return nil if start > ending
+
+      mid = (start + ending) / 2
+      root = Node.new new_arr[mid]
+
+      root.left = build_tree_recur(new_arr, start, mid - 1)
+      root.right = build_tree_recur(new_arr, mid + 1, ending)
+      root
     end
 
     # inserts a leaf (unbalances the tree)

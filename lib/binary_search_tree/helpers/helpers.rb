@@ -4,18 +4,6 @@
 module BinarySearchTree
   # Helps tree methods
   module Helpers
-    # takes array and start and ending of arr range and builds bst recursively
-    def build_tree_recur(new_arr, start, ending)
-      return nil if start > ending
-
-      mid = (start + ending) / 2
-      root = Node.new new_arr[mid]
-
-      root.left = build_tree_recur(new_arr, start, mid - 1)
-      root.right = build_tree_recur(new_arr, mid + 1, ending)
-      root
-    end
-
     # finds successor node (the node right next to current node in ascending order)
     def find_successor(node)
       return nil if node.nil?

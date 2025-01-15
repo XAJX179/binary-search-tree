@@ -54,5 +54,5 @@ like a tree.
 longest path from the node to a leaf node)
 - `#depth(target)` - returns the depth of the target node (number of edge in
 path from the node to the tree's root)
-- `#balanced?` - returns `true` if the tree is balanced.
+- `#balanced?` - returns `true` if the tree is balanced. (currently incomplete)
 - `#rebalance` - rebalances tree.

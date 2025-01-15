@@ -149,15 +149,14 @@ module BinarySearchTree
       depth(target_node, val, current_node.right)
     end
 
-    # THIS IS WRONG every node's subtrees should differ only by 1 not just root
-    # TODO: fix balanced? method
-    # returns true if left and right subtree height doesn't differ > 1 else false
-    def balanced?
-      left = height(@root.left)
-      right = height(@root.right)
+    # checks if tree is balanced
+    def balanced?(node = @root)
+      return true if node.nil?
 
-      diff = (left - right).abs
-      diff <= 1
+      bool = balanced_height?(node)
+      return false unless bool
+
+      balanced?(node.left) && balanced?(node.right)
     end
 
     # rebalances the tree

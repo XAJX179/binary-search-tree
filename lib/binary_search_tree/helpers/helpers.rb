@@ -51,5 +51,14 @@ module BinarySearchTree
 
       result if queue.empty? && !block_given?
     end
+
+    # for given node check if height of left and right subtree <= 1
+    def balanced_height?(node)
+      left = height(node.left)
+      right = height(node.right)
+
+      diff = (left - right).abs
+      diff <= 1
+    end
   end
 end
